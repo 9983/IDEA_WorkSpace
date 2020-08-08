@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.mapper.SsmPermissionMapper" >
+  <resultMap id="BaseResultMap" type="com.zking.model.SsmPermission" >
+    <constructor >
+      <idArg column="Per_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Per_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="pid" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="Per_Permission" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="Per_Explain" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    Per_id, Per_name, pid, Per_Permission, Per_Explain
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from ssm_permission
+    where Per_id = #{perId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from ssm_permission
+    where Per_id = #{perId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zking.model.SsmPermission" >
+    insert into ssm_permission (Per_id, Per_name, pid, 
+      Per_Permission, Per_Explain)
+    values (#{perId,jdbcType=INTEGER}, #{perName,jdbcType=VARCHAR}, #{pid,jdbcType=VARCHAR}, 
+      #{perPermission,jdbcType=VARCHAR}, #{perExplain,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zking.model.SsmPermission" >
+    insert into ssm_permission
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="perId != null" >
+        Per_id,
+      </if>
+      <if test="perName != null" >
+        Per_name,
+      </if>
+      <if test="pid != null" >
+        pid,
+      </if>
+      <if test="perPermission != null" >
+        Per_Permission,
+      </if>
+      <if test="perExplain != null" >
+        Per_Explain,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="perId != null" >
+        #{perId,jdbcType=INTEGER},
+      </if>
+      <if test="perName != null" >
+        #{perName,jdbcType=VARCHAR},
+      </if>
+      <if test="pid != null" >
+        #{pid,jdbcType=VARCHAR},
+      </if>
+      <if test="perPermission != null" >
+        #{perPermission,jdbcType=VARCHAR},
+      </if>
+      <if test="perExplain != null" >
+        #{perExplain,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zking.model.SsmPermission" >
+    update ssm_permission
+    <set >
+      <if test="perName != null" >
+        Per_name = #{perName,jdbcType=VARCHAR},
+      </if>
+      <if test="pid != null" >
+        pid = #{pid,jdbcType=VARCHAR},
+      </if>
+      <if test="perPermission != null" >
+        Per_Permission = #{perPermission,jdbcType=VARCHAR},
+      </if>
+      <if test="perExplain != null" >
+        Per_Explain = #{perExplain,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Per_id = #{perId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zking.model.SsmPermission" >
+    update ssm_permission
+    set Per_name = #{perName,jdbcType=VARCHAR},
+      pid = #{pid,jdbcType=VARCHAR},
+      Per_Permission = #{perPermission,jdbcType=VARCHAR},
+      Per_Explain = #{perExplain,jdbcType=VARCHAR}
+    where Per_id = #{perId,jdbcType=INTEGER}
+  </update>
+</mapper>

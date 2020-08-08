@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.mapper.SsmRolePermissionMapper" >
+  <resultMap id="BaseResultMap" type="com.zking.model.SsmRolePermission" >
+    <constructor >
+      <idArg column="Rp_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Rp_Role_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Rp_Per_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    Rp_ID, Rp_Role_id, Rp_Per_ID
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from ssm_role_permission
+    where Rp_ID = #{rpId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from ssm_role_permission
+    where Rp_ID = #{rpId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zking.model.SsmRolePermission" >
+    insert into ssm_role_permission (Rp_ID, Rp_Role_id, Rp_Per_ID
+      )
+    values (#{rpId,jdbcType=INTEGER}, #{rpRoleId,jdbcType=INTEGER}, #{rpPerId,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zking.model.SsmRolePermission" >
+    insert into ssm_role_permission
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="rpId != null" >
+        Rp_ID,
+      </if>
+      <if test="rpRoleId != null" >
+        Rp_Role_id,
+      </if>
+      <if test="rpPerId != null" >
+        Rp_Per_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="rpId != null" >
+        #{rpId,jdbcType=INTEGER},
+      </if>
+      <if test="rpRoleId != null" >
+        #{rpRoleId,jdbcType=INTEGER},
+      </if>
+      <if test="rpPerId != null" >
+        #{rpPerId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zking.model.SsmRolePermission" >
+    update ssm_role_permission
+    <set >
+      <if test="rpRoleId != null" >
+        Rp_Role_id = #{rpRoleId,jdbcType=INTEGER},
+      </if>
+      <if test="rpPerId != null" >
+        Rp_Per_ID = #{rpPerId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where Rp_ID = #{rpId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zking.model.SsmRolePermission" >
+    update ssm_role_permission
+    set Rp_Role_id = #{rpRoleId,jdbcType=INTEGER},
+      Rp_Per_ID = #{rpPerId,jdbcType=INTEGER}
+    where Rp_ID = #{rpId,jdbcType=INTEGER}
+  </update>
+</mapper>

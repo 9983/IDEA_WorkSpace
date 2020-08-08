@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.mapper.SsmClassAndManageMapper" >
+  <resultMap id="BaseResultMap" type="com.zking.model.SsmClassAndManage" >
+    <constructor >
+      <idArg column="Cam_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Cam_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="Cam_Course_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Cam_Teacher_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Cam_State" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Cam_CreateTime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="Cam_Stu_ID" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    Cam_ID, Cam_name, Cam_Course_ID, Cam_Teacher_ID, Cam_State, Cam_CreateTime, Cam_Stu_ID
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from ssm_classandmanage
+    where Cam_ID = #{camId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from ssm_classandmanage
+    where Cam_ID = #{camId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zking.model.SsmClassAndManage" >
+    insert into ssm_classandmanage (Cam_ID, Cam_name, Cam_Course_ID, 
+      Cam_Teacher_ID, Cam_State, Cam_CreateTime, 
+      Cam_Stu_ID)
+    values (#{camId,jdbcType=INTEGER}, #{camName,jdbcType=VARCHAR}, #{camCourseId,jdbcType=INTEGER}, 
+      #{camTeacherId,jdbcType=INTEGER}, #{camState,jdbcType=INTEGER}, #{camCreatetime,jdbcType=TIMESTAMP}, 
+      #{camStuId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zking.model.SsmClassAndManage" >
+    insert into ssm_classandmanage
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="camId != null" >
+        Cam_ID,
+      </if>
+      <if test="camName != null" >
+        Cam_name,
+      </if>
+      <if test="camCourseId != null" >
+        Cam_Course_ID,
+      </if>
+      <if test="camTeacherId != null" >
+        Cam_Teacher_ID,
+      </if>
+      <if test="camState != null" >
+        Cam_State,
+      </if>
+      <if test="camCreatetime != null" >
+        Cam_CreateTime,
+      </if>
+      <if test="camStuId != null" >
+        Cam_Stu_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="camId != null" >
+        #{camId,jdbcType=INTEGER},
+      </if>
+      <if test="camName != null" >
+        #{camName,jdbcType=VARCHAR},
+      </if>
+      <if test="camCourseId != null" >
+        #{camCourseId,jdbcType=INTEGER},
+      </if>
+      <if test="camTeacherId != null" >
+        #{camTeacherId,jdbcType=INTEGER},
+      </if>
+      <if test="camState != null" >
+        #{camState,jdbcType=INTEGER},
+      </if>
+      <if test="camCreatetime != null" >
+        #{camCreatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="camStuId != null" >
+        #{camStuId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zking.model.SsmClassAndManage" >
+    update ssm_classandmanage
+    <set >
+      <if test="camName != null" >
+        Cam_name = #{camName,jdbcType=VARCHAR},
+      </if>
+      <if test="camCourseId != null" >
+        Cam_Course_ID = #{camCourseId,jdbcType=INTEGER},
+      </if>
+      <if test="camTeacherId != null" >
+        Cam_Teacher_ID = #{camTeacherId,jdbcType=INTEGER},
+      </if>
+      <if test="camState != null" >
+        Cam_State = #{camState,jdbcType=INTEGER},
+      </if>
+      <if test="camCreatetime != null" >
+        Cam_CreateTime = #{camCreatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="camStuId != null" >
+        Cam_Stu_ID = #{camStuId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where Cam_ID = #{camId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zking.model.SsmClassAndManage" >
+    update ssm_classandmanage
+    set Cam_name = #{camName,jdbcType=VARCHAR},
+      Cam_Course_ID = #{camCourseId,jdbcType=INTEGER},
+      Cam_Teacher_ID = #{camTeacherId,jdbcType=INTEGER},
+      Cam_State = #{camState,jdbcType=INTEGER},
+      Cam_CreateTime = #{camCreatetime,jdbcType=TIMESTAMP},
+      Cam_Stu_ID = #{camStuId,jdbcType=INTEGER}
+    where Cam_ID = #{camId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zking.mapper.SsmRoleMapper" >
+  <resultMap id="BaseResultMap" type="com.zking.model.SsmRole" >
+    <constructor >
+      <idArg column="Role_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="Role_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    Role_id, Role_name
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from ssm_role
+    where Role_id = #{roleId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from ssm_role
+    where Role_id = #{roleId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zking.model.SsmRole" >
+    insert into ssm_role (Role_id, Role_name)
+    values (#{roleId,jdbcType=INTEGER}, #{roleName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zking.model.SsmRole" >
+    insert into ssm_role
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="roleId != null" >
+        Role_id,
+      </if>
+      <if test="roleName != null" >
+        Role_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="roleId != null" >
+        #{roleId,jdbcType=INTEGER},
+      </if>
+      <if test="roleName != null" >
+        #{roleName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zking.model.SsmRole" >
+    update ssm_role
+    <set >
+      <if test="roleName != null" >
+        Role_name = #{roleName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Role_id = #{roleId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zking.model.SsmRole" >
+    update ssm_role
+    set Role_name = #{roleName,jdbcType=VARCHAR}
+    where Role_id = #{roleId,jdbcType=INTEGER}
+  </update>
+</mapper>
